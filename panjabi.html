@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raunaq | Premium Panjabi Attire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'panjabi-blue': '#0a1a35',
+                        'panjabi-gold': '#d4af37',
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(10, 26, 53, 0.7), rgba(10, 26, 53, 0.7)), url('https://images.unsplash.com/photo-1595341595379-cf1cd0fb7fb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white font-body text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-panjabi-blue text-white py-4 px-6 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold tracking-wider">RAUNAQ</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-panjabi-gold transition">Home</a>
+                <a href="#" class="hover:text-panjabi-gold transition">Collections</a>
+                <a href="#" class="hover:text-panjabi-gold transition">About</a>
+                <a href="#" class="hover:text-panjabi-gold transition">Heritage</a>
+                <a href="#" class="hover:text-panjabi-gold transition">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-panjabi-gold transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </a>
+                <a href="#" class="hover:text-panjabi-gold transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                </a>
+                <button class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-[80vh] flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-6 py-20">
+            <h1 class="font-display text-4xl md:text-6xl font-bold mb-6">Timeless Panjabi Elegance</h1>
+            <p class="text-xl max-w-2xl mb-8">Handcrafted traditional attire blending centuries of heritage with contemporary sophistication.</p>
+            <a href="#" class="bg-panjabi-gold text-panjabi-blue px-8 py-3 font-medium inline-block hover:bg-opacity-90 transition">Explore Collections</a>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Our Collections</h2>
+                <p class="max-w-2xl mx-auto">Each piece tells a story of craftsmanship passed down through generations</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card relative group overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" alt="Sherwani Collection" class="w-full h-96 object-cover">
+                    <div class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <a href="#" class="bg-panjabi-gold text-panjabi-blue px-6 py-2 font-medium">View Collection</a>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl">Royal Sherwani</h3>
+                        <p>Starting at ₹12,999</p>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card relative group overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Kurta Collection" class="w-full h-96 object-cover">
+                    <div class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <a href="#" class="bg-panjabi-gold text-panjabi-blue px-6 py-2 font-medium">View Collection</a>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl">Silk Kurta Sets</h3>
+                        <p>Starting at ₹7,999</p>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card relative group overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1595341595379-cf1cd0fb7fb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Accessories Collection" class="w-full h-96 object-cover">
+                    <div class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <a href="#" class="bg-panjabi-gold text-panjabi-blue px-6 py-2 font-medium">View Collection</a>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl">Traditional Accessories</h3>
+                        <p>Starting at ₹2,999</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section class="py-16 px-6 bg-panjabi-blue text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">Rooted in Tradition</h2>
+                    <p class="mb-6">For over three generations, our family has dedicated itself to preserving the art of Panjabi textile craftsmanship. Each thread woven with the same passion that inspired our ancestors.</p>
+                    <p>From the intricate phulkari embroidery to the precise cuts of our sherwanis, every detail honors the rich cultural heritage of Punjab while embracing modern elegance.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Traditional Craftsmanship" class="w-full rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-12 text-center">Celebrated by Our Clients</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="mb-4 text-panjabi-gold">
+                        ★★★★★
+                    </div>
+                    <p class="mb-6">"The craftsmanship on my wedding sherwani was exceptional. Received countless compliments throughout the ceremony."</p>
+                    <p class="font-medium">- Rajveer S.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="mb-4 text-panjabi-gold">
+                        ★★★★★
+                    </div>
+                    <p class="mb-6">"Perfect blend of traditional design and modern comfort. The fabric quality is unmatched by any other brand I've tried."</p>
+                    <p class="font-medium">- Priya K.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="mb-4 text-panjabi-gold">
+                        ★★★★★
+                    </div>
+                    <p class="mb-6">"The attention to detail is remarkable. My entire family now wears Raunaq to every special occasion."</p>
+                    <p class="font-medium">- Harpreet M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 px-6 bg-gray-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Stay Connected</h2>
+            <p class="mb-8 max-w-2xl mx-auto">Join our newsletter for exclusive collections, cultural insights, and special offers.</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-panjabi-blue">
+                <button type="submit" class="bg-panjabi-blue text-white px-6 py-3 rounded hover:bg-opacity-90 transition">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-panjabi-blue text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-display text-xl font-bold mb-4">RAUNAQ</h3>
+                    <p>Preserving tradition through contemporary Panjabi fashion since 1972.</p>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">Shop</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-panjabi-gold transition">New Arrivals</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Wedding Collection</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Festive Wear</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">About</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Our Story</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Craftsmanship</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Sustainability</a></li>
+                        <li><a href="#" class="hover:text-panjabi-gold transition">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li>+91 98765 43210</li>
+                        <li>hello@raunaq.com</li>
+                        <li>123 Heritage Road, Ludhiana, Punjab</li>
+                        <li class="flex space-x-4 mt-4">
+                            <a href="#" class="hover:text-panjabi-gold transition">Instagram</a>
+                            <a href="#" class="hover:text-panjabi-gold transition">Facebook</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 Raunaq. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
