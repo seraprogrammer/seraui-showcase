@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Resume Builder</h1>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Editor Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Edit Your Resume</h2>
+                
+                <!-- Personal Info -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-medium mb-3 border-b pb-2">Personal Information</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Phone</label>
+                            <input type="tel" id="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Address</label>
+                            <textarea id="address" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">LinkedIn/Portfolio</label>
+                            <input type="url" id="website" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-medium mb-3 border-b pb-2">Work Experience</h3>
+                    <div id="experience-container">
+                        <div class="experience-item mb-4 p-3 border rounded">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium">New Experience</h4>
+                                <button class="text-red-500 hover:text-red-700 remove-experience">×</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Job Title</label>
+                                    <input type="text" class="exp-title mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Company</label>
+                                    <input type="text" class="exp-company mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                        <input type="text" class="exp-start mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                        <input type="text" class="exp-end mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Description</label>
+                                    <textarea class="exp-desc mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="add-experience" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm">Add Experience</button>
+                </div>
+                
+                <!-- Education -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-medium mb-3 border-b pb-2">Education</h3>
+                    <div id="education-container">
+                        <div class="education-item mb-4 p-3 border rounded">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium">New Education</h4>
+                                <button class="text-red-500 hover:text-red-700 remove-education">×</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Degree</label>
+                                    <input type="text" class="edu-degree mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Institution</label>
+                                    <input type="text" class="edu-institution mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                        <input type="text" class="edu-start mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                        <input type="text" class="edu-end mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="add-education" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm">Add Education</button>
+                </div>
+                
+                <!-- Skills -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-medium mb-3 border-b pb-2">Skills</h3>
+                    <div id="skills-container">
+                        <div class="skill-item mb-2 flex items-center">
+                            <input type="text" class="skill-input flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                            <button class="ml-2 text-red-500 hover:text-red-700 remove-skill">×</button>
+                        </div>
+                    </div>
+                    <button id="add-skill" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm">Add Skill</button>
+                </div>
+                
+                <button id="update-resume" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Update Preview</button>
+            </div>
+            
+            <!-- Preview Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Resume Preview</h2>
+                    <button id="download-pdf" class="bg-gray-800 hover:bg-gray-900 text-white py-1 px-3 rounded text-sm">Download PDF</button>
+                </div>
+                
+                <div id="resume-preview" class="border p-6 bg-white">
+                    <!-- Resume content will be generated here -->
+                    <div class="text-center mb-6">
+                        <h1 id="preview-name" class="text-2xl font-bold">Your Name</h1>
+                        <div class="flex justify-center space-x-4 text-sm text-gray-600">
+                            <span id="preview-email">email@example.com</span>
+                            <span>•</span>
+                            <span id="preview-phone">(123) 456-7890</span>
+                            <span>•</span>
+                            <span id="preview-address">City, State</span>
+                        </div>
+                        <div id="preview-website" class="text-blue-600 text-sm mt-1">linkedin.com/in/yourprofile</div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold border-b border-gray-300 pb-1 mb-3">Experience</h2>
+                        <div id="preview-experience">
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <h3 class="font-semibold">Job Title</h3>
+                                    <span class="text-gray-600">Start - End</span>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Company Name</span>
+                                    <span>Location (optional)</span>
+                                </div>
+                                <p class="text-sm">Job description goes here with details about your responsibilities and achievements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold border-b border-gray-300 pb-1 mb-3">Education</h2>
+                        <div id="preview-education">
+                            <div class="mb-4">
+                                <div class="flex justify-between">
+                                    <h3 class="font-semibold">Degree Name</h3>
+                                    <span class="text-gray-600">Start - End</span>
+                                </div>
+                                <div class="text-sm text-gray-600">University Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-lg font-bold border-b border-gray-300 pb-1 mb-3">Skills</h2>
+                        <div id="preview-skills" class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 px-2 py-1 rounded text-sm">Skill 1</span>
+                            <span class="bg-gray-200 px-2 py-1 rounded text-sm">Skill 2</span>
+                            <span class="bg-gray-200 px-2 py-1 rounded text-sm">Skill 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            
+            // Add experience section
+            document.getElementById('add-experience').addEventListener('click', function() {
+                const container = document.getElementById('experience-container');
+                const newItem = document.createElement('div');
+                newItem.className = 'experience-item mb-4 p-3 border rounded';
+                newItem.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium">New Experience</h4>
+                        <button class="text-red-500 hover:text-red-700 remove-experience">×</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Job Title</label>
+                            <input type="text" class="exp-title mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Company</label>
+                            <input type="text" class="exp-company mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                <input type="text" class="exp-start mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                <input type="text" class="exp-end mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Description</label>
+                            <textarea class="exp-desc mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" rows="3"></textarea>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newItem);
+                
+                // Add event listener to the remove button
+                newItem.querySelector('.remove-experience').addEventListener('click', function() {
+                    container.removeChild(newItem);
+                });
+            });
+            
+            // Add education section
+            document.getElementById('add-education').addEventListener('click', function() {
+                const container = document.getElementById('education-container');
+                const newItem = document.createElement('div');
+                newItem.className = 'education-item mb-4 p-3 border rounded';
+                newItem.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium">New Education</h4>
+                        <button class="text-red-500 hover:text-red-700 remove-education">×</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Degree</label>
+                            <input type="text" class="edu-degree mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Institution</label>
+                            <input type="text" class="edu-institution mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                <input type="text" class="edu-start mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                <input type="text" class="edu-end mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newItem);
+                
+                // Add event listener to the remove button
+                newItem.querySelector('.remove-education').addEventListener('click', function() {
+                    container.removeChild(newItem);
+                });
+            });
+            
+            // Add skill
+            document.getElementById('add-skill').addEventListener('click', function() {
+                const container = document.getElementById('skills-container');
+                const newItem = document.createElement('div');
+                newItem.className = 'skill-item mb-2 flex items-center';
+                newItem.innerHTML = `
+                    <input type="text" class="skill-input flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                    <button class="ml-2 text-red-500 hover:text-red-700 remove-skill">×</button>
+                `;
+                container.appendChild(newItem);
+                
+                // Add event listener to the remove button
+                newItem.querySelector('.remove-skill').addEventListener('click', function() {
+                    container.removeChild(newItem);
+                });
+            });
+            
+            // Update resume preview
+            document.getElementById('update-resume').addEventListener('click', function() {
+                // Personal info
+                document.getElementById('preview-name').textContent = document.getElementById('name').value || 'Your Name';
+                document.getElementById('preview-email').textContent = document.getElementById('email').value || 'email@example.com';
+                document.getElementById('preview-phone').textContent = document.getElementById('phone').value || '(123) 456-7890';
+                document.getElementById('preview-address').textContent = document.getElementById('address').value || 'City, State';
+                document.getElementById('preview-website').textContent = document.getElementById('website').value || 'linkedin.com/in/yourprofile';
+                document.getElementById('preview-website').href = document.getElementById('website').value || '#';
+                
+                // Experience
+                const experienceContainer = document.getElementById('preview-experience');
+                experienceContainer.innerHTML = '';
+                
+                const experienceItems = document.querySelectorAll('.experience-item');
+                experienceItems.forEach(item => {
+                    const title = item.querySelector('.exp-title').value || 'Job Title';
+                    const company = item.querySelector('.exp-company').value || 'Company Name';
+                    const start = item.querySelector('.exp-start').value || 'Start';
+                    const end = item.querySelector('.exp-end').value || 'End';
+                    const desc = item.querySelector('.exp-desc').value || 'Job description goes here with details about your responsibilities and achievements.';
+                    
+                    const expElement = document.createElement('div');
+                    expElement.className = 'mb-4';
+                    expElement.innerHTML = `
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold">${title}</h3>
+                            <span class="text-gray-600">${start} - ${end}</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600 mb-1">
+                            <span>${company}</span>
+                        </div>
+                        <p class="text-sm">${desc}</p>
+                    `;
+                    experienceContainer.appendChild(expElement);
+                });
+                
+                // Education
+                const educationContainer = document.getElementById('preview-education');
+                educationContainer.innerHTML = '';
+                
+                const educationItems = document.querySelectorAll('.education-item');
+                educationItems.forEach(item => {
+                    const degree = item.querySelector('.edu-degree').value || 'Degree Name';
+                    const institution = item.querySelector('.edu-institution').value || 'University Name';
+                    const start = item.querySelector('.edu-start').value || 'Start';
+                    const end = item.querySelector('.edu-end').value || 'End';
+                    
+                    const eduElement = document.createElement('div');
+                    eduElement.className = 'mb-4';
+                    eduElement.innerHTML = `
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold">${degree}</h3>
+                            <span class="text-gray-600">${start} - ${end}</span>
+                        </div>
+                        <div class="text-sm text-gray-600">${institution}</div>
+                    `;
+                    educationContainer.appendChild(eduElement);
+                });
+                
+                // Skills
+                const skillsContainer = document.getElementById('preview-skills');
+                skillsContainer.innerHTML = '';
+                
+                const skillInputs = document.querySelectorAll('.skill-input');
+                skillInputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        const skillElement = document.createElement('span');
+                        skillElement.className = 'bg-gray-200 px-2 py-1 rounded text-sm';
+                        skillElement.textContent = input.value;
+                        skillsContainer.appendChild(skillElement);
+                    }
+                });
+            });
+            
+            // Download as PDF
+            document.getElementById('download-pdf').addEventListener('click', function() {
+                // Update the preview first to ensure we have the latest content
+                document.getElementById('update-resume').click();
+                
+                // Use html2canvas to capture the resume preview
+                const element = document.getElementById('resume-preview');
+                
+                html2canvas(element, {
+                    scale: 2, // Higher quality
+                    logging: false,
+                    useCORS: true
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 297; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    // Add new page if content is too long
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                    
+                    pdf.save('resume.pdf');
+                });
+            });
+            
+            // Initialize with one empty skill
+            document.getElementById('add-skill').click();
+        });
+    </script>
+</body>
+</html>
