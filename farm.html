@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Green Valley Farms - Sustainable organic farming since 2010. Discover our fresh produce and farming services.">
+    <meta name="keywords" content="organic farming, sustainable agriculture, fresh produce, farm to table">
+    <meta name="author" content="Green Valley Farms">
+    <title>Green Valley Farms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .masonry {
+            column-count: 3;
+            column-gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
+        @media (max-width: 640px) {
+            .masonry {
+                column-count: 1;
+            }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .service-card:hover .service-icon {
+            transform: rotateY(180deg);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item::after {
+            content: attr(data-caption);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover::after {
+            transform: translateY(0);
+        }
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans bg-green-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 shadow-sm z-50" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-green-600 text-2xl font-bold" aria-label="Green Valley Farms logo">🌱 Green Valley</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#products" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">Products</a>
+                        <a href="#services" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#gallery" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
+                        <a href="#contact" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 focus:outline-none focus:ring-2 focus:ring-green-600" aria-label="Toggle mobile menu">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu hidden md:hidden bg-white">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#" class="text-green-800 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                    <a href="#products" class="text-gray-600 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">Products</a>
+                    <a href="#services" class="text-gray-600 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                    <a href="#gallery" class="text-gray-600 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                    <a href="#contact" class="text-gray-600 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-60"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 id="hero-headline" class="text-5xl md:text-7xl font-extrabold text-white mb-6 opacity-0 tracking-tight">Welcome to Green Valley Farms</h1>
+            <p id="hero-subtext" class="text-xl md:text-3xl text-white mb-8 opacity-0 font-light">Experience sustainable farming with our fresh, organic produce grown with care.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="hero-cta-shop" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105 opacity-0">
+                    Shop Now
+                </button>
+                <button id="hero-cta-learn" class="bg-transparent border-2 border-white hover:bg-white hover:text-green-800 text-white font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105 opacity-0">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 about-text">
+                    <h2 class="text-3xl font-bold text-green-800 mb-6">Our Farming Story</h2>
+                    <p class="text-gray-600 mb-4">Founded in 2010, Green Valley Farms began with a simple mission: to grow food the way nature intended.</p>
+                    <p class="text-gray-600 mb-4">Today, we operate 200 acres of certified organic farmland, providing fresh produce to local communities while maintaining our commitment to sustainable practices.</p>
+                    <p class="text-gray-600">Our team of passionate farmers works tirelessly to bring you the highest quality fruits, vegetables, and dairy products while preserving the land for future generations.</p>
+                </div>
+                <div class="lg:w-1/2 about-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2070&q=80" alt="Farmers working in field" class="rounded-lg shadow-xl w-full" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Our Seasonal Harvest</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?auto=format&fit=crop&w=1064&q=80" alt="Fresh Tomatoes" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Organic Tomatoes</h3>
+                        <p class="text-gray-600 mb-4">Juicy, vine-ripened tomatoes grown without synthetic pesticides.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-green-600 font-bold">$3.99/lb</span>
+                            <button class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm" aria-label="Add tomatoes to cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://images.unsplash.com/photo-1598032895397-b947244972c2?auto=format&fit=crop&w=1065&q=80" alt="Fresh Carrots" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Rainbow Carrots</h3>
+                        <p class="text-gray-600 mb-4">Colorful, nutrient-packed carrots in purple, yellow, and orange.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-green-600 font-bold">$2.99/bunch</span>
+                            <button class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm" aria-label="Add carrots to cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://images.unsplash.com/photo-1572111503267-d8b3a4a2478f?auto=format&fit=crop&w=1065&q=80" alt="Fresh Apples" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Heirloom Apples</h3>
+                        <p class="text-gray-600 mb-4">Rare varieties with exceptional flavor, perfect for baking.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-green-600 font-bold">$4.99/lb</span>
+                            <button class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm" aria-label="Add apples to cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb1?auto=format&fit=crop&w=1064&q=80" alt="Fresh Lettuce" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Butterhead Lettuce</h3>
+                        <p class="text-gray-600 mb-4">Tender, sweet leaves perfect for salads and sandwiches.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-green-600 font-bold">$3.49/head</span>
+                            <button class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm" aria-label="Add lettuce to cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Our Farming Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        🌱
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">Organic Farming</h3>
+                    <p class="text-gray-600">Certified organic produce grown without synthetic pesticides or fertilizers.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        🚚
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">Farm to Door Delivery</h3>
+                    <p class="text-gray-600">Fresh produce delivered weekly to your home or business.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        👩‍🌾
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">Farm Workshops</h3>
+                    <p class="text-gray-600">Learn sustainable farming techniques from our experts.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        🏫
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">School Programs</h3>
+                    <p class="text-gray-600">Educational programs for students about agriculture and nutrition.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        🛒
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">Farmers Market</h3>
+                    <p class="text-gray-600">Visit our weekly market for fresh produce and local goods.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-green-50 rounded-lg p-8 text-center hover:bg-green-100 transition-colors duration-300">
+                    <div class="service-icon w-20 h-20 mx-auto mb-6 bg-green-600 rounded-full flex items-center justify-center text-white text-3xl transition-transform duration-500">
+                        🐝
+                    </div>
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">Beekeeping</h3>
+                    <p class="text-gray-600">Local honey and pollination services for your garden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Life on the Farm</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-caption="Sunrise over our fields">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2074&q=80" alt="Farm at sunrise" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+                <div class="gallery-item" data-caption="Farmers at work">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2070&q=80" alt="Farmers working in field" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+                <div class="gallery-item" data-caption="Fresh harvest">
+                    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=2071&q=80" alt="Harvesting vegetables" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+                <div class="gallery-item" data-caption="Our farm landscape">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=2070&q=80" alt="Farm landscape" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+                <div class="gallery-item" data-caption="Farm animals">
+                    <img src="https://images.unsplash.com/photo-1563460715610-6ba1a0f6c3af?auto=format&fit=crop&w=2071&q=80" alt="Farm animals" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+                <div class="gallery-item" data-caption="Farmers market">
+                    <img src="https://images.unsplash.com/photo-1597843786186-8266ad4371a0?auto=format&fit=crop&w=2074&q=80" alt="Farmers market stall" class="w-full h-64 object-cover" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Get In Touch</h2>
+            <div class="lg:flex">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Visit Our Farm</h3>
+                    <p class="text-gray-600 mb-6">123 Green Valley Road<br>Farmington, CA 12345</p>
+                    
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Contact Info</h3>
+                    <p class="text-gray-600 mb-2">📞 (555) 123-4567</p>
+                    <p class="text-gray-600 mb-6">✉️ <a href="mailto:info@greenvalleyfarms.com" class="hover:text-green-600">info@greenvalleyfarms.com</a></p>
+                    
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Hours</h3>
+                    <p class="text-gray-600 mb-2">Monday - Friday: 8am - 5pm</p>
+                    <p class="text-gray-600 mb-6">Saturday: 9am - 3pm</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com" class="text-green-600 hover:text-green-800 text-2xl" aria-label="Twitter">📱</a>
+                        <a href="https://instagram.com" class="text-green-600 hover:text-green-800 text-2xl" aria-label="Instagram">📷</a>
+                        <a href="https://facebook.com" class="text-green-600 hover:text-green-800 text-2xl" aria-label="Facebook">📘</a>
+                        <a href="https://linkedin.com" class="text-green-600 hover:text-green-800 text-2xl" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <form class="space-y-6" id="contact-form" novalidate>
+                        <div class="form-group opacity-0">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" aria-required="true">
+                            <p class="error text-red-500 text-sm hidden">Please enter your name</p>
+                        </div>
+                        <div class="form-group opacity-0">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" aria-required="true">
+                            <p class="error text-red-500 text-sm hidden">Please enter a valid email</p>
+                        </div>
+                        <div class="form-group opacity-0">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <input type="text" id="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" aria-required="true">
+                            <p class="error text-red-500 text-sm hidden">Please enter a subject</p>
+                        </div>
+                        <div class="form-group opacity-0">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" aria-required="true"></textarea>
+                            <p class="error text-red-500 text-sm hidden">Please enter a message</p>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 opacity-0" aria-label="Send message">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-800 text-white py-12" aria-label="Footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="footer-section">
+                    <h3 class="text-xl font-bold mb-4">Green Valley Farms</h3>
+                    <p class="mb-4">Growing food the way nature intended since 2010.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com" class="hover:text-green-300" aria-label="Twitter">📱</a>
+                        <a href="https://instagram.com" class="hover:text-green-300" aria-label="Instagram">📷</a>
+                        <a href="https://facebook.com" class="hover:text-green-300" aria-label="Facebook">📘</a>
+                        <a href="https://linkedin.com" class="hover:text-green-300" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-300">Home</a></li>
+                        <li><a href="#about" class="hover:text-green-300">About</a></li>
+                        <li><a href="#products" class="hover:text-green-300">Products</a></li>
+                        <li><a href="#services" class="hover:text-green-300">Services</a></li>
+                        <li><a href="#contact" class="hover:text-green-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="text-lg font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-300">Vegetables</a></li>
+                        <li><a href="#" class="hover:text-green-300">Fruits</a></li>
+                        <li><a href="#" class="hover:text-green-300">Dairy</a></li>
+                        <li><a href="#" class="hover:text-green-300">Honey</a></li>
+                        <li><a href="#" class="hover:text-green-300">Eggs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="mb-4">Subscribe to get updates on seasonal produce and events.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-md text-gray-800" aria-label="Email for newsletter">
+                        <button class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-r-md" aria-label="Subscribe to newsletter">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-green-700 mt-8 pt-8 text-center">
+                <p>© 2025 Green Valley Farms. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('transform');
+                mobileMenu.classList.toggle('translate-y-0');
+            });
+
+            // Form validation
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+                
+                const inputs = form.querySelectorAll('input[required], textarea[required]');
+                inputs.forEach(input => {
+                    const error = input.nextElementSibling;
+                    if (!input.value.trim()) {
+                        error.classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        error.classList.add('hidden');
+                    }
+                    if (input.type === 'email' && input.value) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.value)) {
+                            error.classList.remove('hidden');
+                            isValid = false;
+                        }
+                    }
+                });
+
+                if (isValid) {
+                    // Form submission logic here
+                    alert('Form submitted successfully!');
+                    form.reset();
+                }
+            });
+
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero section animations
+            gsap.from("#hero-headline", {
+                duration: 1.2,
+                y: 50,
+                opacity: 0,
+                scale: 0.9,
+                ease: "power3.out"
+            });
+            
+            gsap.from("#hero-subtext", {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                delay: 0.4,
+                ease: "power3.out"
+            });
+            
+            gsap.from("#hero-cta-shop", {
+                duration: 0.9,
+                y: 30,
+                opacity: 0,
+                delay: 0.8,
+                ease: "back.out(1.7)"
+            });
+            
+            gsap.from("#hero-cta-learn", {
+                duration: 0.9,
+                y: 30,
+                opacity: 0,
+                delay: 1.0,
+                ease: "back.out(1.7)"
+            });
+            
+            // About section animations
+            gsap.from(".about-text", {
+                scrollTrigger: {
+                    trigger: ".about-text",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                x: -60,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+            
+            gsap.from(".about-image", {
+                scrollTrigger: {
+                    trigger: ".about-image",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                x: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+            
+            // Product cards animation
+            gsap.from(".product-card", {
+                scrollTrigger: {
+                    trigger: "#products",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                y: 60,
+                opacity: 0,
+                duration: 0.7,
+                stagger: 0.2,
+                ease: "back.out(1.4)"
+            });
+            
+            // Service cards animation
+            gsap.from(".service-card", {
+                scrollTrigger: {
+                    trigger: "#services",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                y: 60,
+                opacity: 0,
+                duration: 0.7,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+            
+            // Gallery items animation
+            gsap.from(".gallery-item", {
+                scrollTrigger: {
+                    trigger: "#gallery",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.9,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+            
+            // Contact form animation
+            gsap.from(".form-group", {
+                scrollTrigger: {
+                    trigger: "form",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.7,
+                stagger: 0.25,
+                ease: "power3.out"
+            });
+            
+            // Footer animation
+            gsap.from(".footer-section", {
+                scrollTrigger: {
+                    trigger: "footer",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.9,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>
